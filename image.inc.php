@@ -2,7 +2,7 @@
 
 /**
 * Simple Image management class
-* © 2012 Ilya I. Averkov <admin@jsmart.web.id>
+* © 2012-2015 Ilya I. Averkov <ilya.averkov@gmail.com>
 * © 2012 Irfan Mahfudz Guntur <info@bsmsite.com>
 */
 
@@ -434,11 +434,11 @@ class Image
 		}
 	}
 	
-	public function limitWidthTo($maxwidth) {
+	public function limitWidthBy($maxwidth) {
 		return $this->autoResize($maxwidth, 0);
 	}
 	
-	public function limitHeightTo($maxheight) {
+	public function limitHeightBy($maxheight) {
 		return $this->autoResize(0, $maxheight);
 	}
 	
@@ -464,7 +464,6 @@ class Image
 	}
 	
 	public function includeExternalImage($external, $x = 0, $y = 0) {
-		
 		if($external instanceof self) {
 			return @ imagecopy($this->image, $external->asImageResource(), $x, $y, 0, 0, $external->width(), $external->height());
 		}
@@ -525,7 +524,7 @@ class Image
 			if($h < 0) $h ++;
 			if($h > 1) $h --;
 		}
-		return array($h, $s, $v);
+		return [$h, $s, $v];
 	}
 	
 	public function asImageResource() {
@@ -539,7 +538,7 @@ class Image
 	public static function hslToRgb($h, $s, $v) {
 		if($s == 0) {
 			$r = $g = $B = $v * 255;
-			return array($r, $g, $B);
+			return [$r, $g, $B];
 		}
 		
 		$var_H = $h * 6;
@@ -581,6 +580,6 @@ class Image
 			break;
 		}
 		
-		return array($var_R * 255, $var_G * 255, $var_B * 255);
+		return [$var_R * 255, $var_G * 255, $var_B * 255];
 	}
 }
